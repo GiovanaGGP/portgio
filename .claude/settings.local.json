@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"C:\\\\Users\\\\Franco Mendonça\\\\Nova pasta \\(2\\)/\")",
+      "Bash(npm --version)",
+      "Bash(py --version)",
+      "Bash(where python:*)",
+      "Bash(where python3:*)",
+      "Bash(where node:*)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}
