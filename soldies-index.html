@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>soldies.site — Giovana Gabriela Precioso</title>
+<meta name="description" content="soldies.site — Portfólio de Giovana Gabriela Precioso. Desenvolvedora Python, Java, Machine Learning e Automação.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-900: #03061a;
+    --blue-800: #060d2e;
+    --blue-700: #0a1654;
+    --blue-600: #0d1f7a;
+    --blue-500: #1a35c2;
+    --blue-400: #2b52e8;
+    --blue-300: #5c7fff;
+    --blue-200: #93b4ff;
+    --blue-100: #c8d8ff;
+    --accent:   #4af0ff;
+    --accent2:  #ff6b35;
+    --white:    #f0f4ff;
+    --muted:    rgba(147,180,255,0.55);
+    --font-display: 'Syne', sans-serif;
+    --font-mono:    'Space Mono', monospace;
+    --font-body:    'Inter', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--blue-900);
+    color: var(--white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ── BACKGROUND ── */
+  .grid-bg {
+    position: fixed; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(43,82,232,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(43,82,232,0.07) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridShift 20s linear infinite;
+  }
+  @keyframes gridShift { to { background-position: 60px 60px; } }
+
+  .noise {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.3;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  .orb { position: fixed; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: 0; }
+  .orb-1 { width: 600px; height: 600px; background: rgba(43,82,232,0.15); top: -200px; right: -150px; animation: f1 14s ease-in-out infinite; }
+  .orb-2 { width: 400px; height: 400px; background: rgba(74,240,255,0.09); bottom: 10%; left: -100px; animation: f2 18s ease-in-out infinite; }
+  .orb-3 { width: 300px; height: 300px; background: rgba(255,107,53,0.07); top: 40%; right: 5%; animation: f3 12s ease-in-out infinite; }
+  @keyframes f1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,50px)} }
+  @keyframes f2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(50px,-40px)} }
+  @keyframes f3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-25px,25px)} }
+
+  /* ── CURSOR ── */
+  .cursor-glow {
+    position: fixed; width: 350px; height: 350px; border-radius: 50%;
+    pointer-events: none; z-index: 0;
+    background: radial-gradient(circle, rgba(43,82,232,0.07) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: left 0.08s, top 0.08s;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 4rem;
+    background: rgba(3,6,26,0.65);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(43,82,232,0.18);
+  }
+  .nav-logo {
+    font-family: var(--font-mono); font-size: 1.05rem;
+    color: var(--accent); letter-spacing: 0.12em; text-decoration: none;
+  }
+  .nav-right { display: flex; gap: 1rem; align-items: center; }
+  .nav-btn {
+    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.07em;
+    padding: 7px 18px; border-radius: 3px; text-decoration: none;
+    transition: all 0.2s; cursor: pointer; border: none;
+  }
+  .nav-btn-ghost { color: var(--blue-200); border: 1px solid rgba(43,82,232,0.35); background: transparent; }
+  .nav-btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-btn-solid { background: var(--blue-400); color: #fff; }
+  .nav-btn-solid:hover { background: var(--blue-300); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 0.7rem;
+    color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase;
+    border: 1px solid rgba(74,240,255,0.28);
+    padding: 5px 16px; border-radius: 2px;
+    margin-bottom: 2.2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+  .hero-brand {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 800; line-height: 0.9;
+    letter-spacing: -0.03em;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-brand .gg  { color: var(--white); }
+  .hero-brand .dot { color: var(--accent); }
+  .hero-brand .p   { color: var(--blue-300); }
+
+  .hero-name-sub {
+    font-family: var(--font-mono); font-size: 0.9rem;
+    color: var(--blue-200); letter-spacing: 0.12em;
+    text-transform: uppercase; margin-top: 1.2rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--muted); line-height: 1.65;
+    max-width: 580px; margin: 1.8rem auto 0;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .hero-tagline strong { color: var(--blue-200); font-weight: 500; }
+
+  .hero-chips {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center; margin-top: 2rem;
+    animation: fadeUp 0.6s 0.35s ease both;
+  }
+  .chip {
+    font-family: var(--font-mono); font-size: 0.68rem;
+    color: var(--blue-200); letter-spacing: 0.06em;
+    border: 1px solid rgba(43,82,232,0.35);
+    padding: 5px 14px; border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); background: rgba(74,240,255,0.05); }
+  .chip.java { border-color: rgba(255,107,53,0.4); color: #ff8c5a; background: rgba(255,107,53,0.07); }
+
+  .hero-cta {
+    display: flex; gap: 1rem; justify-content: center;
+    margin-top: 3rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.45s ease both;
+  }
+  .btn-primary {
+    background: var(--blue-400); color: #fff;
+    padding: 14px 36px; border-radius: 3px;
+    font-family: var(--font-mono); font-size: 0.82rem;
+    text-decoration: none; letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--blue-300); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid rgba(43,82,232,0.45); color: var(--blue-200);
+    padding: 14px 36px; border-radius: 3px;
+    font-family: var(--font-mono); font-size: 0.82rem;
+    text-decoration: none; letter-spacing: 0.05em;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .btn-whats {
+    background: rgba(37,211,102,0.12);
+    border: 1px solid rgba(37,211,102,0.35);
+    color: #25d366;
+    padding: 14px 36px; border-radius: 3px;
+    font-family: var(--font-mono); font-size: 0.82rem;
+    text-decoration: none; letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-whats:hover { background: rgba(37,211,102,0.22); transform: translateY(-2px); }
+
+  /* ── SCROLL HINT ── */
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: fadeUp 0.6s 0.8s ease both;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, transparent, rgba(74,240,255,0.5));
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+  .scroll-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* ── STATS ── */
+  .stats-section {
+    position: relative; z-index: 1;
+    border-top: 1px solid rgba(43,82,232,0.18);
+    border-bottom: 1px solid rgba(43,82,232,0.18);
+    background: rgba(10,22,84,0.35);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem 2rem;
+    display: flex; justify-content: center; gap: 0; flex-wrap: wrap;
+  }
+  .stat-item {
+    text-align: center; padding: 0 4rem;
+    border-right: 1px solid rgba(43,82,232,0.15);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: var(--font-display); font-size: 2.8rem; font-weight: 800; color: var(--blue-300); }
+  .stat-lbl { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; }
+
+  /* ── QUICK INFO ── */
+  .info-section {
+    position: relative; z-index: 1;
+    max-width: 1200px; margin: 0 auto;
+    padding: 6rem 4rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .info-card {
+    background: rgba(10,22,84,0.38);
+    border: 1px solid rgba(43,82,232,0.2);
+    border-radius: 4px; padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s, background 0.2s;
+  }
+  .info-card:hover { border-color: rgba(74,240,255,0.45); transform: translateY(-4px); background: rgba(10,22,84,0.6); }
+  .info-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .info-card-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+  .info-card-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+  .info-card-tag {
+    display: inline-block; margin-top: 1rem;
+    font-family: var(--font-mono); font-size: 0.65rem;
+    color: var(--accent); border: 1px solid rgba(74,240,255,0.25);
+    padding: 3px 10px; border-radius: 2px; letter-spacing: 0.08em;
+  }
+
+  /* ── LINKS / CONTACT GRID ── */
+  .links-section {
+    position: relative; z-index: 1;
+    background: rgba(6,13,46,0.5);
+    border-top: 1px solid rgba(43,82,232,0.15);
+  }
+  .links-wrap {
+    max-width: 1000px; margin: 0 auto;
+    padding: 6rem 4rem; text-align: center;
+  }
+  .section-tag { font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 0.75rem; }
+  .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--white); line-height: 1.05; margin-bottom: 0.8rem; }
+  .section-title em { font-style: normal; color: var(--blue-300); }
+  .section-sub { font-size: 1rem; color: var(--muted); max-width: 500px; margin: 0 auto 3rem; line-height: 1.7; }
+
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+    max-width: 700px; margin: 0 auto;
+  }
+  .contact-card {
+    display: flex; align-items: center; gap: 1.2rem;
+    background: rgba(10,22,84,0.4);
+    border: 1px solid rgba(43,82,232,0.22);
+    border-radius: 4px; padding: 1.4rem 1.8rem;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  }
+  .contact-card:hover { border-color: rgba(74,240,255,0.5); background: rgba(10,22,84,0.7); transform: translateY(-3px); }
+  .contact-card-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .contact-card-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  .contact-card-value { font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; color: var(--blue-200); margin-top: 2px; }
+  .contact-card.whats { border-color: rgba(37,211,102,0.2); }
+  .contact-card.whats:hover { border-color: rgba(37,211,102,0.6); }
+  .contact-card.whats .contact-card-value { color: #34d399; }
+  .contact-card.tea {
+    grid-column: span 2;
+    border-color: rgba(167,139,250,0.2);
+    justify-content: center;
+  }
+  .contact-card.tea:hover { border-color: rgba(167,139,250,0.5); }
+  .contact-card.tea .contact-card-value { color: #a78bfa; }
+
+  /* ── PORTFOLIO HIGHLIGHT ── */
+  .portfolio-section {
+    position: relative; z-index: 1;
+    max-width: 900px; margin: 0 auto;
+    padding: 0 4rem 6rem;
+  }
+  .portfolio-card {
+    background: linear-gradient(135deg, rgba(10,22,84,0.6), rgba(6,13,46,0.8));
+    border: 1px solid rgba(43,82,232,0.3);
+    border-radius: 6px; padding: 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .portfolio-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+  .portfolio-card-label { font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+  .portfolio-card-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; color: var(--white); margin-bottom: 0.8rem; }
+  .portfolio-card-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.7; max-width: 500px; margin: 0 auto 2rem; }
+  .portfolio-preview-langs {
+    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;
+  }
+  .lang-badge {
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em;
+    padding: 4px 12px; border-radius: 2px; text-transform: uppercase;
+  }
+  .lb-java { background: rgba(255,107,53,0.15); color: #ff8c5a; border: 1px solid rgba(255,107,53,0.3); }
+  .lb-py   { background: rgba(74,240,255,0.1);  color: var(--accent); border: 1px solid rgba(74,240,255,0.25); }
+  .lb-js   { background: rgba(240,219,79,0.1);  color: #e8d44d; border: 1px solid rgba(240,219,79,0.3); }
+  .lb-ml   { background: rgba(167,139,250,0.1); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
+  .lb-iot  { background: rgba(52,211,153,0.1);  color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center; padding: 2rem;
+    border-top: 1px solid rgba(43,82,232,0.12);
+    font-family: var(--font-mono); font-size: 0.68rem;
+    color: rgba(147,180,255,0.3); letter-spacing: 0.08em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .info-section { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-card.tea { grid-column: span 1; }
+    .links-wrap { padding: 4rem 1.5rem; }
+    .portfolio-section { padding: 0 1.5rem 4rem; }
+    .portfolio-card { padding: 2rem 1.5rem; }
+    .stat-item { padding: 1rem 2rem; border-right: none; border-bottom: 1px solid rgba(43,82,232,0.15); }
+    .stat-item:last-child { border-bottom: none; }
+    .stats-section { flex-direction: column; align-items: center; }
+    .hero-cta { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="noise"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="cursor-glow" id="cg"></div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">{ soldies.site }</span>
+  <div class="nav-right">
+    <a href="https://github.com/GiovanaGGP" target="_blank" class="nav-btn nav-btn-ghost">GitHub</a>
+    <a href="portfolio.html" class="nav-btn nav-btn-solid">Ver Portfólio →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-eyebrow">Disponível para freelance &amp; oportunidades</span>
+
+  <h1 class="hero-brand">
+    <span class="gg">GG</span><span class="dot">.</span><span class="p">P</span>
+  </h1>
+  <p class="hero-name-sub">Giovana Gabriela Precioso</p>
+
+  <p class="hero-tagline">
+    Estudante de <strong>Sistemas de Informação</strong>, 19 anos.<br>
+    Desenvolvimento em <strong>Python · Java · JavaScript</strong> —<br>
+    com foco em <strong>automação, ciência de dados e IA</strong>.
+  </p>
+
+  <div class="hero-chips">
+    <span class="chip java">Java</span>
+    <span class="chip">Python</span>
+    <span class="chip">Machine Learning</span>
+    <span class="chip">JavaScript</span>
+    <span class="chip">Ciência de Dados</span>
+    <span class="chip">Arduino</span>
+    <span class="chip">Automação</span>
+  </div>
+
+  <div class="hero-cta">
+    <a href="portfolio.html" class="btn-primary">Ver portfólio completo →</a>
+    <a href="mailto:giovanaprecioso2019@gmail.com" class="btn-outline">✉ Enviar e-mail</a>
+    <a href="https://wa.me/5516993851486" target="_blank" class="btn-whats">💬 WhatsApp</a>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stat-item">
+    <div class="stat-num" data-target="9" data-suffix="+">9+</div>
+    <div class="stat-lbl">Projetos</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="5">5</div>
+    <div class="stat-lbl">Linguagens</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="3">3</div>
+    <div class="stat-lbl">Anos de estudo</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="100" data-suffix="%">100%</div>
+    <div class="stat-lbl">Inglês técnico</div>
+  </div>
+</div>
+
+<!-- INFO CARDS -->
+<div class="info-section">
+  <div class="info-card reveal">
+    <div class="info-card-icon">☕</div>
+    <div class="info-card-title">Java &amp; POO</div>
+    <div class="info-card-desc">APIs REST, padrões MVC/SOLID, algoritmos, Collections Framework e projetos desktop com Swing. Experiência com Maven e JUnit.</div>
+    <span class="info-card-tag">Java · Maven · JUnit</span>
+  </div>
+  <div class="info-card reveal">
+    <div class="info-card-icon">🤖</div>
+    <div class="info-card-title">Python &amp; IA</div>
+    <div class="info-card-desc">Machine Learning com Scikit-learn, análise de dados com Pandas/Seaborn, automação de processos e NLP básico com NLTK.</div>
+    <span class="info-card-tag">Python · Scikit-learn · NLP</span>
+  </div>
+  <div class="info-card reveal">
+    <div class="info-card-icon">⚡</div>
+    <div class="info-card-title">Web &amp; IoT</div>
+    <div class="info-card-desc">Interfaces web com JavaScript, HTML e CSS. Projetos de integração hardware-software com Arduino, Flask e comunicação serial.</div>
+    <span class="info-card-tag">JS · Arduino · Flask</span>
+  </div>
+  <div class="info-card reveal">
+    <div class="info-card-icon">💼</div>
+    <div class="info-card-title">Experiência Profissional</div>
+    <div class="info-card-desc">Suporte tecnológico, automações e organização de informações digitais em escritório de advocacia. Aplicação prática de ferramentas digitais no dia a dia.</div>
+    <span class="info-card-tag">Automação · Suporte · Digital</span>
+  </div>
+  <div class="info-card reveal">
+    <div class="info-card-icon">🎓</div>
+    <div class="info-card-title">Formação</div>
+    <div class="info-card-desc">Graduanda em Sistemas de Informação, com técnico integrado ao EM em Análise e Desenvolvimento de Sistemas.</div>
+    <span class="info-card-tag">SI · ADS</span>
+  </div>
+  <div class="info-card reveal">
+    <div class="info-card-icon">🌐</div>
+    <div class="info-card-title">Inglês Fluente</div>
+    <div class="info-card-desc">Leitura, comunicação e compreensão de documentações, artigos e cursos técnicos em inglês. Acompanha conteúdo internacional de IA e tecnologia.</div>
+    <span class="info-card-tag">Fluente · Técnico</span>
+  </div>
+</div>
+
+<!-- PORTFOLIO HIGHLIGHT -->
+<div class="portfolio-section">
+  <div class="portfolio-card reveal">
+    <div class="portfolio-card-label">// portfólio de projetos</div>
+    <h2 class="portfolio-card-title">9 projetos detalhados com código</h2>
+    <p class="portfolio-card-desc">
+      Cards interativos com descrição completa, trechos de código reais e tecnologias utilizadas. Clique em qualquer projeto para expandir os detalhes.
+    </p>
+    <div class="portfolio-preview-langs">
+      <span class="lang-badge lb-java">Java</span>
+      <span class="lang-badge lb-py">Python</span>
+      <span class="lang-badge lb-js">JavaScript</span>
+      <span class="lang-badge lb-ml">Machine Learning</span>
+      <span class="lang-badge lb-iot">Arduino / IoT</span>
+    </div>
+    <a href="portfolio.html" class="btn-primary" style="display:inline-flex;margin:0 auto;">
+      Abrir portfólio completo →
+    </a>
+  </div>
+</div>
+
+<!-- CONTACT / LINKS -->
+<section class="links-section">
+  <div class="links-wrap">
+    <span class="section-tag">// contato &amp; links</span>
+    <h2 class="section-title">Vamos <em>trabalhar juntos?</em></h2>
+    <p class="section-sub">Aberta a freelances, projetos, parcerias e oportunidades na área de tecnologia.</p>
+
+    <div class="contact-grid">
+      <a href="mailto:giovanaprecioso2019@gmail.com" class="contact-card reveal">
+        <span class="contact-card-icon">✉</span>
+        <div>
+          <div class="contact-card-label">E-mail</div>
+          <div class="contact-card-value">giovanaprecioso2019@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://wa.me/5516993851486" target="_blank" class="contact-card whats reveal">
+        <span class="contact-card-icon">💬</span>
+        <div>
+          <div class="contact-card-label">WhatsApp</div>
+          <div class="contact-card-value">(16) 99385-1486</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/giovanagabrielaprecioso" target="_blank" class="contact-card reveal">
+        <span class="contact-card-icon">🔗</span>
+        <div>
+          <div class="contact-card-label">LinkedIn</div>
+          <div class="contact-card-value">giovanagabrielaprecioso</div>
+        </div>
+      </a>
+      <a href="https://github.com/GiovanaGGP" target="_blank" class="contact-card reveal">
+        <span class="contact-card-icon">🐙</span>
+        <div>
+          <div class="contact-card-label">GitHub</div>
+          <div class="contact-card-value">GiovanaGGP</div>
+        </div>
+      </a>
+      <div class="contact-card tea reveal">
+        <span class="contact-card-icon">♾</span>
+        <div>
+          <div class="contact-card-label">Neurodivergência</div>
+          <div class="contact-card-value">TEA · Deficiência Psicossocial</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Giovana Gabriela Precioso · soldies.site · Sistemas de Informação · © 2026</p>
+</footer>
+
+<script>
+  // Cursor glow
+  const cg = document.getElementById('cg');
+  document.addEventListener('mousemove', e => {
+    cg.style.left = e.clientX + 'px';
+    cg.style.top  = e.clientY + 'px';
+  });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 90);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Counter animation
+  function animCount(el, target, suffix = '') {
+    let start = null;
+    const step = ts => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / 1400, 1);
+      el.textContent = Math.floor(p * target) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  const statsObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      document.querySelectorAll('.stat-num').forEach(el => {
+        const t = parseInt(el.dataset.target);
+        const s = el.dataset.suffix || '';
+        animCount(el, t, s);
+      });
+      statsObs.disconnect();
+    }
+  }, { threshold: 0.5 });
+  const statsEl = document.querySelector('.stats-section');
+  if (statsEl) statsObs.observe(statsEl);
+</script>
+</body>
+</html>
