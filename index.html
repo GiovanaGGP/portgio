@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfólio — Giovana Gabriela Precioso</title>
+<title>GGP.dev — Giovana Gabriela Precioso</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -17,27 +17,26 @@
     --blue-300: #5c7fff;
     --blue-200: #93b4ff;
     --blue-100: #c8d8ff;
-    --blue-50:  #e8eeff;
-    --accent: #4af0ff;
-    --accent2: #ff6b35;
-    --white: #f0f4ff;
-    --muted: rgba(147,180,255,0.55);
+    --accent:   #4af0ff;
+    --accent2:  #ff6b35;
+    --white:    #f0f4ff;
+    --muted:    rgba(147,180,255,0.55);
     --font-display: 'Syne', sans-serif;
-    --font-mono: 'Space Mono', monospace;
-    --font-body: 'Inter', sans-serif;
+    --font-mono:    'Space Mono', monospace;
+    --font-body:    'Inter', sans-serif;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { background: var(--blue-900); color: var(--white); font-family: var(--font-body); overflow-x: hidden; }
-
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 0; opacity: 0.35;
+  body {
+    background: var(--blue-900);
+    color: var(--white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    min-height: 100vh;
   }
 
+  /* ── BACKGROUND ── */
   .grid-bg {
     position: fixed; inset: 0; z-index: 0;
     background-image:
@@ -46,944 +45,545 @@
     background-size: 60px 60px;
     animation: gridShift 20s linear infinite;
   }
-  @keyframes gridShift { 0% { background-position: 0 0; } 100% { background-position: 60px 60px; } }
+  @keyframes gridShift { to { background-position: 60px 60px; } }
 
-  .orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
-  .orb-1 { width: 500px; height: 500px; background: rgba(43,82,232,0.18); top: -150px; right: -100px; animation: float1 12s ease-in-out infinite; }
-  .orb-2 { width: 350px; height: 350px; background: rgba(74,240,255,0.1); bottom: 20%; left: -80px; animation: float2 15s ease-in-out infinite; }
-  .orb-3 { width: 250px; height: 250px; background: rgba(43,82,232,0.12); top: 50%; right: 10%; animation: float3 10s ease-in-out infinite; }
-  @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,40px)} }
-  @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-30px)} }
-  @keyframes float3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,20px)} }
+  .noise {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.3;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
 
-  /* NAV */
+  .orb { position: fixed; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: 0; }
+  .orb-1 { width: 600px; height: 600px; background: rgba(43,82,232,0.15); top: -200px; right: -150px; animation: f1 14s ease-in-out infinite; }
+  .orb-2 { width: 400px; height: 400px; background: rgba(74,240,255,0.09); bottom: 10%; left: -100px; animation: f2 18s ease-in-out infinite; }
+  .orb-3 { width: 300px; height: 300px; background: rgba(255,107,53,0.07); top: 40%; right: 5%; animation: f3 12s ease-in-out infinite; }
+  @keyframes f1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,50px)} }
+  @keyframes f2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(50px,-40px)} }
+  @keyframes f3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-25px,25px)} }
+
+  /* ── CURSOR ── */
+  .cursor-glow {
+    position: fixed; width: 350px; height: 350px; border-radius: 50%;
+    pointer-events: none; z-index: 0;
+    background: radial-gradient(circle, rgba(43,82,232,0.07) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: left 0.08s, top 0.08s;
+  }
+
+  /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 4rem;
-    background: rgba(3,6,26,0.7);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(43,82,232,0.2);
+    padding: 1.1rem 4rem;
+    background: rgba(3,6,26,0.65);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(43,82,232,0.18);
   }
-  .nav-logo { font-family: var(--font-mono); font-size: 1rem; color: var(--accent); letter-spacing: 0.1em; }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a { font-family: var(--font-mono); font-size: 0.75rem; color: var(--blue-200); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent); }
+  .nav-logo {
+    font-family: var(--font-mono); font-size: 1.05rem;
+    color: var(--accent); letter-spacing: 0.12em; text-decoration: none;
+  }
+  .nav-right { display: flex; gap: 1rem; align-items: center; }
+  .nav-btn {
+    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.07em;
+    padding: 7px 18px; border-radius: 3px; text-decoration: none;
+    transition: all 0.2s; cursor: pointer; border: none;
+  }
+  .nav-btn-ghost { color: var(--blue-200); border: 1px solid rgba(43,82,232,0.35); background: transparent; }
+  .nav-btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-btn-solid { background: var(--blue-400); color: #fff; }
+  .nav-btn-solid:hover { background: var(--blue-300); transform: translateY(-1px); }
 
-  section { position: relative; z-index: 1; }
-
-  /* HERO */
-  #hero {
+  /* ── HERO ── */
+  .hero {
+    position: relative; z-index: 1;
     min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: center; gap: 4rem;
-    padding: 8rem 4rem 4rem;
-    max-width: 1300px; margin: 0 auto;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
   }
-  .hero-text { position: relative; }
-  .hero-tag {
+
+  .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--font-mono); font-size: 0.72rem;
-    color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
-    border: 1px solid rgba(74,240,255,0.3);
-    padding: 6px 14px; border-radius: 2px; margin-bottom: 2rem;
+    font-family: var(--font-mono); font-size: 0.7rem;
+    color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase;
+    border: 1px solid rgba(74,240,255,0.28);
+    padding: 5px 16px; border-radius: 2px;
+    margin-bottom: 2.2rem;
     animation: fadeUp 0.6s ease both;
   }
-  .hero-tag::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--accent); animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-  .hero-name { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 800; line-height: 0.95; color: var(--white); animation: fadeUp 0.6s 0.1s ease both; }
-  .hero-name span { color: var(--blue-300); }
-  .hero-role { font-family: var(--font-mono); font-size: 0.95rem; color: var(--blue-200); margin: 1.5rem 0 1rem; animation: fadeUp 0.6s 0.2s ease both; }
-  .hero-desc { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 460px; animation: fadeUp 0.6s 0.3s ease both; }
-  .hero-cta { display: flex; gap: 1rem; margin-top: 2.5rem; animation: fadeUp 0.6s 0.4s ease both; }
-  .btn-primary { background: var(--blue-400); color: #fff; padding: 12px 28px; border-radius: 3px; font-family: var(--font-mono); font-size: 0.8rem; text-decoration: none; letter-spacing: 0.05em; transition: background 0.2s, transform 0.15s; border: none; cursor: pointer; }
-  .btn-primary:hover { background: var(--blue-300); transform: translateY(-2px); }
-  .btn-outline { border: 1px solid rgba(43,82,232,0.5); color: var(--blue-200); padding: 12px 28px; border-radius: 3px; font-family: var(--font-mono); font-size: 0.8rem; text-decoration: none; letter-spacing: 0.05em; transition: border-color 0.2s, color 0.2s, transform 0.15s; }
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-
-  /* AVATAR */
-  .hero-photo { display: flex; justify-content: center; align-items: center; animation: fadeUp 0.8s 0.2s ease both; }
-  .photo-wrap { position: relative; width: 320px; height: 320px; }
-  .photo-border { position: absolute; inset: -12px; border: 1px solid rgba(43,82,232,0.4); border-radius: 50%; animation: rotate 20s linear infinite; }
-  .photo-border-2 { position: absolute; inset: -24px; border: 1px solid rgba(74,240,255,0.15); border-radius: 50%; animation: rotate 30s linear infinite reverse; }
-  @keyframes rotate { 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
-  .avatar-circle {
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--blue-700), var(--blue-600));
-    border: 2px solid rgba(43,82,232,0.5);
-    display: flex; align-items: center; justify-content: center;
-    position: relative; z-index: 1;
-    box-shadow: 0 0 60px rgba(43,82,232,0.3);
+  .hero-eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); animation: pulse 2s infinite;
   }
-  .avatar-initials { font-family: var(--font-display); font-size: 5rem; font-weight: 800; color: var(--blue-300); letter-spacing: -2px; }
-  .photo-accent { position: absolute; bottom: -10px; right: -10px; z-index: 2; background: var(--blue-700); border: 1px solid rgba(74,240,255,0.3); padding: 12px 18px; border-radius: 3px; }
-  .photo-accent-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 0.1em; }
-  .photo-accent-val { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--white); }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
 
-  /* STATS */
-  .stats-bar {
-    position: relative; z-index: 1;
-    border-top: 1px solid rgba(43,82,232,0.2);
-    border-bottom: 1px solid rgba(43,82,232,0.2);
-    background: rgba(10,22,84,0.4);
-    backdrop-filter: blur(8px);
-    padding: 2rem 4rem;
-    display: flex; justify-content: center; gap: 5rem;
+  .hero-brand {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 800; line-height: 0.9;
+    letter-spacing: -0.03em;
+    animation: fadeUp 0.6s 0.1s ease both;
   }
-  .stat { text-align: center; }
-  .stat-num { font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; color: var(--blue-300); }
-  .stat-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+  .hero-brand .gg  { color: var(--white); }
+  .hero-brand .dot { color: var(--accent); }
+  .hero-brand .p   { color: var(--blue-300); }
 
-  /* SECTION HEADERS */
-  .section-wrap { max-width: 1300px; margin: 0 auto; padding: 6rem 4rem; }
-  .section-tag { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; display: block; }
-  .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; color: var(--white); line-height: 1.05; margin-bottom: 1rem; }
-  .section-title em { font-style: normal; color: var(--blue-300); }
-  .section-sub { font-size: 1rem; color: var(--muted); max-width: 520px; line-height: 1.7; }
-  .section-line { width: 60px; height: 2px; background: linear-gradient(90deg, var(--blue-400), transparent); margin: 1.5rem 0 3rem; }
+  .hero-name-sub {
+    font-family: var(--font-mono); font-size: 0.9rem;
+    color: var(--blue-200); letter-spacing: 0.12em;
+    text-transform: uppercase; margin-top: 1.2rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
 
-  /* ABOUT */
-  #about .section-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-  .about-text p { font-size: 1rem; color: rgba(193,214,255,0.75); line-height: 1.8; margin-bottom: 1.2rem; }
-  .tech-stack { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem; }
-  .tech-tag { font-family: var(--font-mono); font-size: 0.72rem; color: var(--blue-200); border: 1px solid rgba(43,82,232,0.4); padding: 5px 12px; border-radius: 2px; letter-spacing: 0.05em; transition: border-color 0.2s, color 0.2s, background 0.2s; }
-  .tech-tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(74,240,255,0.05); }
-  .tech-tag.highlight { border-color: rgba(255,107,53,0.5); color: #ff8c5a; background: rgba(255,107,53,0.08); }
-  .about-card { background: rgba(10,22,84,0.5); border: 1px solid rgba(43,82,232,0.25); border-radius: 4px; padding: 2rem; backdrop-filter: blur(8px); }
-  .about-card-item { padding: 1rem 0; border-bottom: 1px solid rgba(43,82,232,0.15); display: flex; gap: 1rem; align-items: flex-start; }
-  .about-card-item:last-child { border-bottom: none; }
-  .about-icon { width: 36px; height: 36px; border-radius: 6px; background: rgba(43,82,232,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; }
-  .about-card-title { font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 3px; }
-  .about-card-sub { font-size: 0.8rem; color: var(--muted); }
-  .tea-badge {
+  .hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--muted); line-height: 1.65;
+    max-width: 580px; margin: 1.8rem auto 0;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .hero-tagline strong { color: var(--blue-200); font-weight: 500; }
+
+  .hero-chips {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center; margin-top: 2rem;
+    animation: fadeUp 0.6s 0.35s ease both;
+  }
+  .chip {
+    font-family: var(--font-mono); font-size: 0.68rem;
+    color: var(--blue-200); letter-spacing: 0.06em;
+    border: 1px solid rgba(43,82,232,0.35);
+    padding: 5px 14px; border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); background: rgba(74,240,255,0.05); }
+  .chip.java { border-color: rgba(255,107,53,0.4); color: #ff8c5a; background: rgba(255,107,53,0.07); }
+
+  .hero-cta {
+    display: flex; gap: 1rem; justify-content: center;
+    margin-top: 3rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.45s ease both;
+  }
+  .btn-primary {
+    background: var(--blue-400); color: #fff;
+    padding: 14px 36px; border-radius: 3px;
+    font-family: var(--font-mono); font-size: 0.82rem;
+    text-decoration: none; letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.15s;
     display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--font-mono); font-size: 0.7rem;
-    color: #a78bfa; letter-spacing: 0.08em;
-    border: 1px solid rgba(167,139,250,0.3);
-    background: rgba(167,139,250,0.07);
-    padding: 5px 14px; border-radius: 2px; margin-top: 1rem;
+  }
+  .btn-primary:hover { background: var(--blue-300); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid rgba(43,82,232,0.45); color: var(--blue-200);
+    padding: 14px 36px; border-radius: 3px;
+    font-family: var(--font-mono); font-size: 0.82rem;
+    text-decoration: none; letter-spacing: 0.05em;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .btn-whats {
+    background: rgba(37,211,102,0.12);
+    border: 1px solid rgba(37,211,102,0.35);
+    color: #25d366;
+    padding: 14px 36px; border-radius: 3px;
+    font-family: var(--font-mono); font-size: 0.82rem;
+    text-decoration: none; letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-whats:hover { background: rgba(37,211,102,0.22); transform: translateY(-2px); }
+
+  /* ── SCROLL HINT ── */
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: fadeUp 0.6s 0.8s ease both;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, transparent, rgba(74,240,255,0.5));
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+  .scroll-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* ── STATS ── */
+  .stats-section {
+    position: relative; z-index: 1;
+    border-top: 1px solid rgba(43,82,232,0.18);
+    border-bottom: 1px solid rgba(43,82,232,0.18);
+    background: rgba(10,22,84,0.35);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem 2rem;
+    display: flex; justify-content: center; gap: 0; flex-wrap: wrap;
+  }
+  .stat-item {
+    text-align: center; padding: 0 4rem;
+    border-right: 1px solid rgba(43,82,232,0.15);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: var(--font-display); font-size: 2.8rem; font-weight: 800; color: var(--blue-300); }
+  .stat-lbl { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; }
+
+  /* ── QUICK INFO ── */
+  .info-section {
+    position: relative; z-index: 1;
+    max-width: 1200px; margin: 0 auto;
+    padding: 6rem 4rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .info-card {
+    background: rgba(10,22,84,0.38);
+    border: 1px solid rgba(43,82,232,0.2);
+    border-radius: 4px; padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s, background 0.2s;
+  }
+  .info-card:hover { border-color: rgba(74,240,255,0.45); transform: translateY(-4px); background: rgba(10,22,84,0.6); }
+  .info-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .info-card-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+  .info-card-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+  .info-card-tag {
+    display: inline-block; margin-top: 1rem;
+    font-family: var(--font-mono); font-size: 0.65rem;
+    color: var(--accent); border: 1px solid rgba(74,240,255,0.25);
+    padding: 3px 10px; border-radius: 2px; letter-spacing: 0.08em;
   }
 
-  /* PROJECTS */
-  #projects { background: rgba(6,13,46,0.5); }
-  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .project-card {
+  /* ── LINKS / CONTACT GRID ── */
+  .links-section {
+    position: relative; z-index: 1;
+    background: rgba(6,13,46,0.5);
+    border-top: 1px solid rgba(43,82,232,0.15);
+  }
+  .links-wrap {
+    max-width: 1000px; margin: 0 auto;
+    padding: 6rem 4rem; text-align: center;
+  }
+  .section-tag { font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 0.75rem; }
+  .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--white); line-height: 1.05; margin-bottom: 0.8rem; }
+  .section-title em { font-style: normal; color: var(--blue-300); }
+  .section-sub { font-size: 1rem; color: var(--muted); max-width: 500px; margin: 0 auto 3rem; line-height: 1.7; }
+
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+    max-width: 700px; margin: 0 auto;
+  }
+  .contact-card {
+    display: flex; align-items: center; gap: 1.2rem;
     background: rgba(10,22,84,0.4);
-    border: 1px solid rgba(43,82,232,0.2);
-    border-radius: 4px; padding: 1.75rem;
-    transition: border-color 0.2s, transform 0.2s, background 0.2s;
-    cursor: pointer;
+    border: 1px solid rgba(43,82,232,0.22);
+    border-radius: 4px; padding: 1.4rem 1.8rem;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  }
+  .contact-card:hover { border-color: rgba(74,240,255,0.5); background: rgba(10,22,84,0.7); transform: translateY(-3px); }
+  .contact-card-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .contact-card-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  .contact-card-value { font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; color: var(--blue-200); margin-top: 2px; }
+  .contact-card.whats { border-color: rgba(37,211,102,0.2); }
+  .contact-card.whats:hover { border-color: rgba(37,211,102,0.6); }
+  .contact-card.whats .contact-card-value { color: #34d399; }
+  .contact-card.tea {
+    grid-column: span 2;
+    border-color: rgba(167,139,250,0.2);
+    justify-content: center;
+  }
+  .contact-card.tea:hover { border-color: rgba(167,139,250,0.5); }
+  .contact-card.tea .contact-card-value { color: #a78bfa; }
+
+  /* ── PORTFOLIO HIGHLIGHT ── */
+  .portfolio-section {
+    position: relative; z-index: 1;
+    max-width: 900px; margin: 0 auto;
+    padding: 0 4rem 6rem;
+  }
+  .portfolio-card {
+    background: linear-gradient(135deg, rgba(10,22,84,0.6), rgba(6,13,46,0.8));
+    border: 1px solid rgba(43,82,232,0.3);
+    border-radius: 6px; padding: 3rem;
+    text-align: center;
     position: relative; overflow: hidden;
   }
-  .project-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(43,82,232,0.08), transparent); opacity: 0; transition: opacity 0.3s; }
-  .project-card:hover { border-color: rgba(74,240,255,0.5); transform: translateY(-4px); background: rgba(10,22,84,0.7); }
-  .project-card:hover::before { opacity: 1; }
-  .project-card-click-hint {
-    position: absolute; top: 12px; right: 14px;
-    font-family: var(--font-mono); font-size: 0.6rem;
-    color: rgba(74,240,255,0.4); letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color 0.2s;
+  .portfolio-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
   }
-  .project-card:hover .project-card-click-hint { color: var(--accent); }
-  .project-lang { display: inline-block; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; margin-bottom: 1.2rem; }
-  .lang-java { background: rgba(255,107,53,0.15); color: #ff8c5a; border: 1px solid rgba(255,107,53,0.3); }
-  .lang-js   { background: rgba(240,219,79,0.12); color: #e8d44d; border: 1px solid rgba(240,219,79,0.3); }
-  .lang-py   { background: rgba(74,240,255,0.12); color: var(--accent); border: 1px solid rgba(74,240,255,0.25); }
-  .lang-ml   { background: rgba(167,139,250,0.12); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
-  .lang-iot  { background: rgba(52,211,153,0.12); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
-  .lang-ts   { background: rgba(43,82,232,0.2); color: var(--blue-200); border: 1px solid rgba(43,82,232,0.4); }
-  .project-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
-  .project-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.25rem; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .project-tag { font-family: var(--font-mono); font-size: 0.65rem; color: rgba(147,180,255,0.7); border: 1px solid rgba(43,82,232,0.2); padding: 3px 8px; border-radius: 2px; }
-  .project-open-btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--font-mono); font-size: 0.7rem;
-    color: var(--blue-300); margin-top: 1.2rem;
-    text-decoration: none; letter-spacing: 0.05em;
-    transition: color 0.2s; border: none; background: none; cursor: pointer; padding: 0;
+  .portfolio-card-label { font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+  .portfolio-card-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; color: var(--white); margin-bottom: 0.8rem; }
+  .portfolio-card-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.7; max-width: 500px; margin: 0 auto 2rem; }
+  .portfolio-preview-langs {
+    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;
   }
-  .project-open-btn:hover { color: var(--accent); }
-  .project-open-btn::after { content: '→'; }
+  .lang-badge {
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em;
+    padding: 4px 12px; border-radius: 2px; text-transform: uppercase;
+  }
+  .lb-java { background: rgba(255,107,53,0.15); color: #ff8c5a; border: 1px solid rgba(255,107,53,0.3); }
+  .lb-py   { background: rgba(74,240,255,0.1);  color: var(--accent); border: 1px solid rgba(74,240,255,0.25); }
+  .lb-js   { background: rgba(240,219,79,0.1);  color: #e8d44d; border: 1px solid rgba(240,219,79,0.3); }
+  .lb-ml   { background: rgba(167,139,250,0.1); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
+  .lb-iot  { background: rgba(52,211,153,0.1);  color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
 
-  /* MODAL */
-  .modal-overlay {
-    position: fixed; inset: 0; z-index: 1000;
-    background: rgba(3,6,26,0.85);
-    backdrop-filter: blur(12px);
-    display: flex; align-items: center; justify-content: center;
-    padding: 2rem;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.25s;
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center; padding: 2rem;
+    border-top: 1px solid rgba(43,82,232,0.12);
+    font-family: var(--font-mono); font-size: 0.68rem;
+    color: rgba(147,180,255,0.3); letter-spacing: 0.08em;
   }
-  .modal-overlay.open { opacity: 1; pointer-events: all; }
-  .modal {
-    background: var(--blue-800);
-    border: 1px solid rgba(43,82,232,0.35);
-    border-radius: 6px;
-    padding: 2.5rem;
-    max-width: 680px; width: 100%;
-    max-height: 85vh; overflow-y: auto;
-    position: relative;
-    transform: translateY(20px);
-    transition: transform 0.25s;
-    box-shadow: 0 0 80px rgba(43,82,232,0.25);
-  }
-  .modal-overlay.open .modal { transform: translateY(0); }
-  .modal-close {
-    position: absolute; top: 1.2rem; right: 1.2rem;
-    background: none; border: none; cursor: pointer;
-    color: var(--muted); font-size: 1.4rem; line-height: 1;
-    transition: color 0.2s; width: 32px; height: 32px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 3px;
-  }
-  .modal-close:hover { color: var(--accent); background: rgba(74,240,255,0.08); }
-  .modal-lang { margin-bottom: 1rem; }
-  .modal-title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--white); margin-bottom: 1rem; }
-  .modal-full-desc { font-size: 0.95rem; color: rgba(193,214,255,0.8); line-height: 1.8; margin-bottom: 1.5rem; }
-  .modal-section-label { font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; margin-top: 1.5rem; }
-  .modal-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; }
-  .modal-tag { font-family: var(--font-mono); font-size: 0.72rem; color: var(--blue-200); border: 1px solid rgba(43,82,232,0.35); padding: 4px 12px; border-radius: 2px; }
-  .modal-highlights { list-style: none; }
-  .modal-highlights li { font-size: 0.9rem; color: rgba(193,214,255,0.75); padding: 5px 0; padding-left: 1.2rem; position: relative; line-height: 1.6; }
-  .modal-highlights li::before { content: '▸'; position: absolute; left: 0; color: var(--blue-300); }
-  .modal-github-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 1.8rem;
-    background: rgba(43,82,232,0.15); border: 1px solid rgba(43,82,232,0.4);
-    color: var(--blue-200); padding: 10px 22px; border-radius: 3px;
-    font-family: var(--font-mono); font-size: 0.78rem;
-    text-decoration: none; letter-spacing: 0.05em;
-    transition: background 0.2s, border-color 0.2s, color 0.2s;
-  }
-  .modal-github-btn:hover { background: rgba(43,82,232,0.3); border-color: var(--accent); color: var(--accent); }
 
-  /* SKILLS SECTION */
-  #skills { background: rgba(3,6,26,0.4); }
-  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .skill-card {
-    background: rgba(10,22,84,0.35); border: 1px solid rgba(43,82,232,0.2);
-    border-radius: 4px; padding: 2rem;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .skill-card:hover { border-color: rgba(74,240,255,0.4); transform: translateY(-3px); }
-  .skill-icon { font-size: 2rem; margin-bottom: 1rem; }
-  .skill-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
-  .skill-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
-  .skill-level {
-    margin-top: 1rem;
-    height: 3px; background: rgba(43,82,232,0.2); border-radius: 2px; overflow: hidden;
-  }
-  .skill-level-bar { height: 100%; background: linear-gradient(90deg, var(--blue-400), var(--accent)); border-radius: 2px; }
-
-  /* CONTACT */
-  #contact { background: rgba(6,13,46,0.6); }
-  .contact-wrap { max-width: 700px; margin: 0 auto; text-align: center; padding: 6rem 2rem; }
-  .contact-wrap .section-title { margin-bottom: 1rem; }
-  .contact-wrap .section-sub { margin: 0 auto 2.5rem; }
-  .contact-email { font-family: var(--font-mono); font-size: 1.1rem; color: var(--blue-200); text-decoration: none; border-bottom: 1px solid rgba(43,82,232,0.4); padding-bottom: 4px; transition: color 0.2s, border-color 0.2s; display: inline-block; margin-bottom: 2.5rem; }
-  .contact-email:hover { color: var(--accent); border-color: var(--accent); }
-  .social-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
-  .social-link { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; padding: 8px 16px; border: 1px solid rgba(43,82,232,0.25); border-radius: 2px; }
-  .social-link:hover { color: var(--accent); border-color: rgba(74,240,255,0.4); }
-
-  footer { position: relative; z-index: 1; text-align: center; padding: 2rem; border-top: 1px solid rgba(43,82,232,0.15); font-family: var(--font-mono); font-size: 0.7rem; color: rgba(147,180,255,0.3); letter-spacing: 0.08em; }
-
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.65s ease, transform 0.65s ease; }
   .reveal.in { opacity: 1; transform: translateY(0); }
 
+  /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    nav { padding: 1rem 2rem; }
-    .nav-links { display: none; }
-    #hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; text-align: center; }
-    .hero-desc { margin: 0 auto; }
-    .hero-cta { justify-content: center; }
-    .hero-photo { order: -1; }
-    .photo-wrap { width: 220px; height: 220px; }
-    .avatar-initials { font-size: 3.5rem; }
-    .stats-bar { flex-wrap: wrap; gap: 2rem; padding: 2rem; }
-    #about .section-wrap { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .section-wrap { padding: 4rem 2rem; }
-    .modal { padding: 1.8rem; }
+    nav { padding: 1rem 1.5rem; }
+    .info-section { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-card.tea { grid-column: span 1; }
+    .links-wrap { padding: 4rem 1.5rem; }
+    .portfolio-section { padding: 0 1.5rem 4rem; }
+    .portfolio-card { padding: 2rem 1.5rem; }
+    .stat-item { padding: 1rem 2rem; border-right: none; border-bottom: 1px solid rgba(43,82,232,0.15); }
+    .stat-item:last-child { border-bottom: none; }
+    .stats-section { flex-direction: column; align-items: center; }
+    .hero-cta { flex-direction: column; align-items: center; }
   }
-
-  .cursor-glow { position: fixed; width: 300px; height: 300px; border-radius: 50%; pointer-events: none; z-index: 0; background: radial-gradient(circle, rgba(43,82,232,0.08) 0%, transparent 70%); transform: translate(-50%, -50%); transition: left 0.1s, top 0.1s; }
 </style>
 </head>
 <body>
 <div class="grid-bg"></div>
+<div class="noise"></div>
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
-<div class="cursor-glow" id="cursor-glow"></div>
+<div class="cursor-glow" id="cg"></div>
 
 <!-- NAV -->
 <nav>
   <span class="nav-logo">{ ggp.dev }</span>
-  <ul class="nav-links">
-    <li><a href="#about">Sobre</a></li>
-    <li><a href="#projects">Projetos</a></li>
-    <li><a href="#skills">Habilidades</a></li>
-    <li><a href="#contact">Contato</a></li>
-  </ul>
+  <div class="nav-right">
+    <a href="https://github.com/GiovanaGGP" target="_blank" class="nav-btn nav-btn-ghost">GitHub</a>
+    <a href="portfolio.html" class="nav-btn nav-btn-solid">Ver Portfólio →</a>
+  </div>
 </nav>
 
 <!-- HERO -->
-<section id="hero-section">
-  <div id="hero">
-    <div class="hero-text">
-      <span class="hero-tag">Disponível para oportunidades</span>
-      <h1 class="hero-name">Giovana<br><span>Gabriela Precioso</span></h1>
-      <p class="hero-role">// SI · Python · Java · Machine Learning · Dados</p>
-      <p class="hero-desc">Estudante de Sistemas de Informação, 19 anos. Desenvolvo soluções em Python, Java e JavaScript — com foco em automação, ciência de dados e inteligência artificial.</p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn-primary">Ver projetos</a>
-        <a href="#contact" class="btn-outline">Falar comigo</a>
-      </div>
-    </div>
-    <div class="hero-photo">
-      <div class="photo-wrap">
-        <div class="photo-border"></div>
-        <div class="photo-border-2"></div>
-        <div class="avatar-circle">
-          <span class="avatar-initials">GGP</span>
-        </div>
-        <div class="photo-accent">
-          <div class="photo-accent-label">Idade</div>
-          <div class="photo-accent-val">19 anos</div>
-        </div>
-      </div>
-    </div>
+<section class="hero">
+  <span class="hero-eyebrow">Disponível para freelance &amp; oportunidades</span>
+
+  <h1 class="hero-brand">
+    <span class="gg">GG</span><span class="dot">.</span><span class="p">P</span>
+  </h1>
+  <p class="hero-name-sub">Giovana Gabriela Precioso</p>
+
+  <p class="hero-tagline">
+    Estudante de <strong>Sistemas de Informação</strong>, 19 anos.<br>
+    Desenvolvimento em <strong>Python · Java · JavaScript</strong> —<br>
+    com foco em <strong>automação, ciência de dados e IA</strong>.
+  </p>
+
+  <div class="hero-chips">
+    <span class="chip java">Java</span>
+    <span class="chip">Python</span>
+    <span class="chip">Machine Learning</span>
+    <span class="chip">JavaScript</span>
+    <span class="chip">Ciência de Dados</span>
+    <span class="chip">Arduino</span>
+    <span class="chip">Automação</span>
+  </div>
+
+  <div class="hero-cta">
+    <a href="portfolio.html" class="btn-primary">Ver portfólio completo →</a>
+    <a href="mailto:giovanaprecioso2019@gmail.com" class="btn-outline">✉ Enviar e-mail</a>
+    <a href="https://wa.me/5516993851486" target="_blank" class="btn-whats">💬 WhatsApp</a>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">scroll</span>
   </div>
 </section>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Projetos desenvolvidos</div></div>
-  <div class="stat"><div class="stat-num">5</div><div class="stat-label">Linguagens</div></div>
-  <div class="stat"><div class="stat-num">3</div><div class="stat-label">Anos de estudo</div></div>
-  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Inglês técnico</div></div>
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stat-item">
+    <div class="stat-num" data-target="9" data-suffix="+">9+</div>
+    <div class="stat-lbl">Projetos</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="5">5</div>
+    <div class="stat-lbl">Linguagens</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="3">3</div>
+    <div class="stat-lbl">Anos de estudo</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="100" data-suffix="%">100%</div>
+    <div class="stat-lbl">Inglês técnico</div>
+  </div>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-wrap">
-    <div class="about-text reveal">
-      <span class="section-tag">// sobre mim</span>
-      <h2 class="section-title">Quem sou <em>eu</em></h2>
-      <div class="section-line"></div>
-      <p>Sou Giovana Gabriela Precioso, estudante de <strong style="color:var(--blue-200)">Sistemas de Informação</strong> com formação técnica integrada ao ensino médio em Análise e Desenvolvimento de Sistemas. Tenho 19 anos e atuo na área de tecnologia com foco em programação, ciência de dados e aprendizado de máquina.</p>
-      <p>Ao longo da minha formação desenvolvi conhecimentos em lógica de programação, desenvolvimento de software e análise de dados. Trabalho com conceitos de <strong style="color:var(--blue-200)">Machine Learning</strong>: treinamento de modelos, organização de bases de dados e algoritmos de análise e recomendação.</p>
-      <p>Tenho experiência prática com projetos que envolvem <strong style="color:var(--blue-200)">Arduino e integração hardware-software</strong>, ampliando minha visão sobre automação. Também atuo profissionalmente em um escritório de advocacia, com suporte tecnológico, automações e organização de informações digitais.</p>
-      <p>Possuo <strong style="color:var(--blue-200)">inglês fluente</strong> para leitura, comunicação e compreensão de materiais técnicos internacionais.</p>
-      <div class="tea-badge">♾ TEA · Deficiência Psicossocial</div>
-      <div class="tech-stack">
-        <span class="tech-tag highlight">Java</span>
-        <span class="tech-tag">Python</span>
-        <span class="tech-tag">JavaScript</span>
-        <span class="tech-tag">Machine Learning</span>
-        <span class="tech-tag">Pandas</span>
-        <span class="tech-tag">Scikit-learn</span>
-        <span class="tech-tag">Arduino</span>
-        <span class="tech-tag">SQL</span>
-        <span class="tech-tag">Git</span>
-        <span class="tech-tag">HTML/CSS</span>
-        <span class="tech-tag">Automação</span>
-        <span class="tech-tag">Ciência de Dados</span>
-      </div>
-    </div>
-    <div class="about-card reveal">
-      <div class="about-card-item">
-        <div class="about-icon">🎓</div>
-        <div>
-          <div class="about-card-title">Formação</div>
-          <div class="about-card-sub">Sistemas de Informação · Técnico em ADS (Integrado ao EM)</div>
-        </div>
-      </div>
-      <div class="about-card-item">
-        <div class="about-icon">💼</div>
-        <div>
-          <div class="about-card-title">Experiência profissional</div>
-          <div class="about-card-sub">Suporte e automações em escritório de advocacia</div>
-        </div>
-      </div>
-      <div class="about-card-item">
-        <div class="about-icon">🤖</div>
-        <div>
-          <div class="about-card-title">Foco atual</div>
-          <div class="about-card-sub">IA · Ciência de Dados · Sistemas Inteligentes</div>
-        </div>
-      </div>
-      <div class="about-card-item">
-        <div class="about-icon">🌐</div>
-        <div>
-          <div class="about-card-title">Idiomas</div>
-          <div class="about-card-sub">Português (nativo) · Inglês fluente (técnico)</div>
-        </div>
-      </div>
-      <div class="about-card-item">
-        <div class="about-icon">🔗</div>
-        <div>
-          <div class="about-card-title">GitHub</div>
-          <div class="about-card-sub"><a href="https://github.com/GiovanaGGP" target="_blank" style="color:var(--blue-300);text-decoration:none;">github.com/GiovanaGGP</a></div>
-        </div>
-      </div>
-    </div>
+<!-- INFO CARDS -->
+<div class="info-section">
+  <div class="info-card reveal">
+    <div class="info-card-icon">☕</div>
+    <div class="info-card-title">Java &amp; POO</div>
+    <div class="info-card-desc">APIs REST, padrões MVC/SOLID, algoritmos, Collections Framework e projetos desktop com Swing. Experiência com Maven e JUnit.</div>
+    <span class="info-card-tag">Java · Maven · JUnit</span>
   </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-wrap">
-    <span class="section-tag">// projetos</span>
-    <h2 class="section-title">O que já <em>construí</em></h2>
-    <p class="section-sub">Clique em qualquer card para ver os detalhes completos do projeto.</p>
-    <div class="section-line"></div>
-    <div class="projects-grid">
-
-      <!-- PROJECT 1: Java -->
-      <div class="project-card reveal" onclick="openModal('modal-java-rec')">
-        <span class="project-card-click-hint">ver detalhes</span>
-        <span class="project-lang lang-java">Java</span>
-        <div class="project-name">Sistema de Recomendação de Conteúdo</div>
-        <div class="project-desc">Aplicação Java que utiliza algoritmos de filtragem colaborativa para recomendar conteúdos baseado no histórico e preferências do usuário.</div>
-        <div class="project-tags">
-          <span class="project-tag">Java 17</span>
-          <span class="project-tag">Algoritmos ML</span>
-          <span class="project-tag">Collections</span>
-          <span class="project-tag">OOP</span>
-        </div>
-        <button class="project-open-btn">Abrir projeto</button>
-      </div>
-
-      <!-- PROJECT 2: Python ML -->
-      <div class="project-card reveal" onclick="openModal('modal-py-ml')">
-        <span class="project-card-click-hint">ver detalhes</span>
-        <span class="project-lang lang-ml">Machine Learning</span>
-        <div class="project-name">Classificador de Dados com Scikit-learn</div>
-        <div class="project-desc">Modelo de Machine Learning treinado para classificação de dados com comparação de algoritmos (Random Forest, SVM, KNN) e análise de desempenho.</div>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">Scikit-learn</span>
-          <span class="project-tag">Pandas</span>
-          <span class="project-tag">Matplotlib</span>
-        </div>
-        <button class="project-open-btn">Abrir projeto</button>
-      </div>
-
-      <!-- PROJECT 3: Python Automação -->
-      <div class="project-card reveal" onclick="openModal('modal-py-auto')">
-        <span class="project-card-click-hint">ver detalhes</span>
-        <span class="project-lang lang-py">Python</span>
-        <div class="project-name">Automação de Processos Jurídicos</div>
-        <div class="project-desc">Script de automação para o escritório de advocacia: organização de documentos, geração de relatórios automáticos e envio de notificações de prazos processuais.</div>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">openpyxl</span>
-          <span class="project-tag">smtplib</span>
-          <span class="project-tag">Automação</span>
-        </div>
-        <button class="project-open-btn">Abrir projeto</button>
-      </div>
-
-      <!-- PROJECT 4: Arduino/IoT -->
-      <div class="project-card reveal" onclick="openModal('modal-iot')">
-        <span class="project-card-click-hint">ver detalhes</span>
-        <span class="project-lang lang-iot">Arduino / IoT</span>
-        <div class="project-name">Sistema de Monitoramento com Arduino</div>
-        <div class="project-desc">Projeto de hardware e software integrando sensores Arduino com interface web em Python para monitoramento de dados em tempo real com alertas automáticos.</div>
-        <div class="project-tags">
-          <span class="project-tag">Arduino</span>
-          <span class="project-tag">Python</span>
-          <span class="project-tag">Serial</span>
-          <span class="project-tag">Flask</span>
-        </div>
-        <button class="project-open-btn">Abrir projeto</button>
-      </div>
-
-      <!-- PROJECT 5: Java API -->
-      <div class="project-card reveal" onclick="openModal('modal-java-api')">
-        <span class="project-card-click-hint">ver detalhes</span>
-        <span class="project-lang lang-java">Java</span>
-        <div class="project-name">API REST de Gestão de Informações</div>
-        <div class="project-desc">API RESTful em Java para gestão e organização de informações digitais, com autenticação, CRUD completo e documentação Swagger. Desenvolvida com boas práticas de POO.</div>
-        <div class="project-tags">
-          <span class="project-tag">Java</span>
-          <span class="project-tag">REST API</span>
-          <span class="project-tag">JSON</span>
-          <span class="project-tag">Maven</span>
-        </div>
-        <button class="project-open-btn">Abrir projeto</button>
-      </div>
-
-      <!-- PROJECT 6: Análise de Dados -->
-      <div class="project-card reveal" onclick="openModal('modal-data-analysis')">
-        <span class="project-card-click-hint">ver detalhes</span>
-        <span class="project-lang lang-py">Python</span>
-        <div class="project-name">Análise Exploratória de Dados</div>
-        <div class="project-desc">Pipeline completo de análise de dados: coleta, limpeza, visualização e extração de insights com Pandas e Matplotlib. Inclui relatório com conclusões e padrões identificados.</div>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">Pandas</span>
-          <span class="project-tag">Matplotlib</span>
-          <span class="project-tag">Seaborn</span>
-        </div>
-        <button class="project-open-btn">Abrir projeto</button>
-      </div>
-
-      <!-- PROJECT 7: JS Web -->
-      <div class="project-card reveal" onclick="openModal('modal-js-web')">
-        <span class="project-card-click-hint">ver detalhes</span>
-        <span class="project-lang lang-js">JavaScript</span>
-        <div class="project-name">Sistema Web para Gestão de Tarefas</div>
-        <div class="project-desc">Aplicação web em JavaScript puro com armazenamento local, filtros dinâmicos, categorias e interface responsiva. Focada em produtividade pessoal e profissional.</div>
-        <div class="project-tags">
-          <span class="project-tag">JavaScript</span>
-          <span class="project-tag">HTML5</span>
-          <span class="project-tag">CSS3</span>
-          <span class="project-tag">LocalStorage</span>
-        </div>
-        <button class="project-open-btn">Abrir projeto</button>
-      </div>
-
-      <!-- PROJECT 8: Python Chatbot -->
-      <div class="project-card reveal" onclick="openModal('modal-chatbot')">
-        <span class="project-card-click-hint">ver detalhes</span>
-        <span class="project-lang lang-ml">IA / NLP</span>
-        <div class="project-name">Chatbot com Processamento de Linguagem</div>
-        <div class="project-desc">Chatbot em Python com NLP básico para responder perguntas frequentes. Utiliza técnicas de processamento de linguagem natural para identificar intenções e retornar respostas.</div>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">NLTK</span>
-          <span class="project-tag">NLP</span>
-          <span class="project-tag">IA</span>
-        </div>
-        <button class="project-open-btn">Abrir projeto</button>
-      </div>
-
-      <!-- PROJECT 9: Java OOP -->
-      <div class="project-card reveal" onclick="openModal('modal-java-oop')">
-        <span class="project-card-click-hint">ver detalhes</span>
-        <span class="project-lang lang-java">Java</span>
-        <div class="project-name">Sistema de Biblioteca em Java</div>
-        <div class="project-desc">Sistema desktop para gerenciamento de biblioteca com cadastro de livros, empréstimos, devoluções e relatórios. Aplica padrões de projeto (MVC) e princípios SOLID.</div>
-        <div class="project-tags">
-          <span class="project-tag">Java</span>
-          <span class="project-tag">MVC</span>
-          <span class="project-tag">SOLID</span>
-          <span class="project-tag">Swing</span>
-        </div>
-        <button class="project-open-btn">Abrir projeto</button>
-      </div>
-
-    </div>
+  <div class="info-card reveal">
+    <div class="info-card-icon">🤖</div>
+    <div class="info-card-title">Python &amp; IA</div>
+    <div class="info-card-desc">Machine Learning com Scikit-learn, análise de dados com Pandas/Seaborn, automação de processos e NLP básico com NLTK.</div>
+    <span class="info-card-tag">Python · Scikit-learn · NLP</span>
   </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-wrap">
-    <span class="section-tag">// habilidades</span>
-    <h2 class="section-title">Minhas <em>competências</em></h2>
-    <div class="section-line"></div>
-    <div class="skills-grid">
-      <div class="skill-card reveal">
-        <div class="skill-icon">☕</div>
-        <div class="skill-name">Java</div>
-        <div class="skill-desc">Programação orientada a objetos, padrões de projeto, APIs REST, estruturas de dados e algoritmos. Experiência com Maven e boas práticas SOLID.</div>
-        <div class="skill-level"><div class="skill-level-bar" style="width:70%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">🐍</div>
-        <div class="skill-name">Python</div>
-        <div class="skill-desc">Análise de dados com Pandas, Machine Learning com Scikit-learn, automação de processos, manipulação de arquivos e criação de scripts eficientes.</div>
-        <div class="skill-level"><div class="skill-level-bar" style="width:85%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">🤖</div>
-        <div class="skill-name">Machine Learning</div>
-        <div class="skill-desc">Treinamento de modelos supervisionados e não supervisionados, avaliação de desempenho, pré-processamento de dados e organização de datasets.</div>
-        <div class="skill-level"><div class="skill-level-bar" style="width:65%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">📊</div>
-        <div class="skill-name">Ciência de Dados</div>
-        <div class="skill-desc">Análise exploratória, visualização com Matplotlib e Seaborn, limpeza e transformação de dados, extração de insights e geração de relatórios.</div>
-        <div class="skill-level"><div class="skill-level-bar" style="width:75%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">🌐</div>
-        <div class="skill-name">Desenvolvimento Web</div>
-        <div class="skill-desc">HTML, CSS, JavaScript — criação de interfaces responsivas e sistemas web. Experiência com manipulação do DOM e integração com APIs.</div>
-        <div class="skill-level"><div class="skill-level-bar" style="width:72%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">⚡</div>
-        <div class="skill-name">Arduino &amp; IoT</div>
-        <div class="skill-desc">Integração de sensores e atuadores com Arduino, comunicação serial com Python, lógica de controle e prototipagem de sistemas físico-digitais.</div>
-        <div class="skill-level"><div class="skill-level-bar" style="width:60%"></div></div>
-      </div>
-    </div>
+  <div class="info-card reveal">
+    <div class="info-card-icon">⚡</div>
+    <div class="info-card-title">Web &amp; IoT</div>
+    <div class="info-card-desc">Interfaces web com JavaScript, HTML e CSS. Projetos de integração hardware-software com Arduino, Flask e comunicação serial.</div>
+    <span class="info-card-tag">JS · Arduino · Flask</span>
   </div>
-</section>
+  <div class="info-card reveal">
+    <div class="info-card-icon">💼</div>
+    <div class="info-card-title">Experiência Profissional</div>
+    <div class="info-card-desc">Suporte tecnológico, automações e organização de informações digitais em escritório de advocacia. Aplicação prática de ferramentas digitais no dia a dia.</div>
+    <span class="info-card-tag">Automação · Suporte · Digital</span>
+  </div>
+  <div class="info-card reveal">
+    <div class="info-card-icon">🎓</div>
+    <div class="info-card-title">Formação</div>
+    <div class="info-card-desc">Graduanda em Sistemas de Informação, com técnico integrado ao EM em Análise e Desenvolvimento de Sistemas.</div>
+    <span class="info-card-tag">SI · ADS</span>
+  </div>
+  <div class="info-card reveal">
+    <div class="info-card-icon">🌐</div>
+    <div class="info-card-title">Inglês Fluente</div>
+    <div class="info-card-desc">Leitura, comunicação e compreensão de documentações, artigos e cursos técnicos em inglês. Acompanha conteúdo internacional de IA e tecnologia.</div>
+    <span class="info-card-tag">Fluente · Técnico</span>
+  </div>
+</div>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-wrap">
-    <span class="section-tag">// contato</span>
-    <h2 class="section-title">Vamos <em>conversar?</em></h2>
-    <p class="section-sub">Tem um projeto, oportunidade ou quer trocar uma ideia sobre tecnologia? Me manda uma mensagem — respondo em breve.</p>
-    <a href="mailto:giovanaprecioso2019@gmail.com" class="contact-email reveal">giovanaprecioso2019@gmail.com</a>
-    <div class="social-links reveal">
-      <a href="https://www.linkedin.com/in/giovanagabrielaprecioso" target="_blank" class="social-link">LinkedIn</a>
-      <a href="https://github.com/GiovanaGGP" target="_blank" class="social-link">GitHub</a>
-      <a href="https://wa.me/5516993851486" target="_blank" class="social-link">WhatsApp</a>
+<!-- PORTFOLIO HIGHLIGHT -->
+<div class="portfolio-section">
+  <div class="portfolio-card reveal">
+    <div class="portfolio-card-label">// portfólio de projetos</div>
+    <h2 class="portfolio-card-title">9 projetos detalhados com código</h2>
+    <p class="portfolio-card-desc">
+      Cards interativos com descrição completa, trechos de código reais e tecnologias utilizadas. Clique em qualquer projeto para expandir os detalhes.
+    </p>
+    <div class="portfolio-preview-langs">
+      <span class="lang-badge lb-java">Java</span>
+      <span class="lang-badge lb-py">Python</span>
+      <span class="lang-badge lb-js">JavaScript</span>
+      <span class="lang-badge lb-ml">Machine Learning</span>
+      <span class="lang-badge lb-iot">Arduino / IoT</span>
+    </div>
+    <a href="portfolio.html" class="btn-primary" style="display:inline-flex;margin:0 auto;">
+      Abrir portfólio completo →
+    </a>
+  </div>
+</div>
+
+<!-- CONTACT / LINKS -->
+<section class="links-section">
+  <div class="links-wrap">
+    <span class="section-tag">// contato &amp; links</span>
+    <h2 class="section-title">Vamos <em>trabalhar juntos?</em></h2>
+    <p class="section-sub">Aberta a freelances, projetos, parcerias e oportunidades na área de tecnologia.</p>
+
+    <div class="contact-grid">
+      <a href="mailto:giovanaprecioso2019@gmail.com" class="contact-card reveal">
+        <span class="contact-card-icon">✉</span>
+        <div>
+          <div class="contact-card-label">E-mail</div>
+          <div class="contact-card-value">giovanaprecioso2019@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://wa.me/5516993851486" target="_blank" class="contact-card whats reveal">
+        <span class="contact-card-icon">💬</span>
+        <div>
+          <div class="contact-card-label">WhatsApp</div>
+          <div class="contact-card-value">(16) 99385-1486</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/giovanagabrielaprecioso" target="_blank" class="contact-card reveal">
+        <span class="contact-card-icon">🔗</span>
+        <div>
+          <div class="contact-card-label">LinkedIn</div>
+          <div class="contact-card-value">giovanagabrielaprecioso</div>
+        </div>
+      </a>
+      <a href="https://github.com/GiovanaGGP" target="_blank" class="contact-card reveal">
+        <span class="contact-card-icon">🐙</span>
+        <div>
+          <div class="contact-card-label">GitHub</div>
+          <div class="contact-card-value">GiovanaGGP</div>
+        </div>
+      </a>
+      <div class="contact-card tea reveal">
+        <span class="contact-card-icon">♾</span>
+        <div>
+          <div class="contact-card-label">Neurodivergência</div>
+          <div class="contact-card-value">TEA · Deficiência Psicossocial</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>Giovana Gabriela Precioso · Sistemas de Informação · © 2026</p>
+  <p>Giovana Gabriela Precioso · GGP.dev · Sistemas de Informação · © 2026</p>
 </footer>
-
-<!-- MODALS -->
-<div class="modal-overlay" id="modal-java-rec" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-java-rec')">✕</button>
-    <div class="modal-lang"><span class="project-lang lang-java">Java</span></div>
-    <div class="modal-title">Sistema de Recomendação de Conteúdo</div>
-    <div class="modal-full-desc">
-      Aplicação desenvolvida em Java que implementa um sistema de recomendação baseado em filtragem colaborativa. O sistema analisa o histórico de interações dos usuários, calcula similaridades entre perfis e sugere conteúdos relevantes com base nas preferências identificadas. Foi meu primeiro projeto completo unindo lógica de algoritmos com programação orientada a objetos.
-    </div>
-    <div class="modal-section-label">// tecnologias utilizadas</div>
-    <div class="modal-tags">
-      <span class="modal-tag">Java 17</span>
-      <span class="modal-tag">OOP</span>
-      <span class="modal-tag">Collections Framework</span>
-      <span class="modal-tag">Algoritmos de similaridade</span>
-      <span class="modal-tag">Maven</span>
-    </div>
-    <div class="modal-section-label">// funcionalidades</div>
-    <ul class="modal-highlights">
-      <li>Cadastro e gerenciamento de usuários e conteúdos</li>
-      <li>Algoritmo de filtragem colaborativa (User-Based CF)</li>
-      <li>Cálculo de similaridade por cosseno entre vetores de preferência</li>
-      <li>Geração de lista personalizada de recomendações</li>
-      <li>Exportação dos resultados em formato texto</li>
-    </ul>
-    <a href="https://github.com/GiovanaGGP" target="_blank" class="modal-github-btn">Ver no GitHub →</a>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modal-py-ml" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-py-ml')">✕</button>
-    <div class="modal-lang"><span class="project-lang lang-ml">Machine Learning</span></div>
-    <div class="modal-title">Classificador de Dados com Scikit-learn</div>
-    <div class="modal-full-desc">
-      Projeto de Machine Learning em Python com pipeline completo: carregamento e limpeza de dados, divisão treino/teste, treinamento de múltiplos algoritmos de classificação e comparação de desempenho com métricas de avaliação. O objetivo foi entender na prática como diferentes algoritmos se comportam em diferentes tipos de dados.
-    </div>
-    <div class="modal-section-label">// tecnologias utilizadas</div>
-    <div class="modal-tags">
-      <span class="modal-tag">Python</span>
-      <span class="modal-tag">Scikit-learn</span>
-      <span class="modal-tag">Pandas</span>
-      <span class="modal-tag">NumPy</span>
-      <span class="modal-tag">Matplotlib</span>
-      <span class="modal-tag">Seaborn</span>
-    </div>
-    <div class="modal-section-label">// o que foi implementado</div>
-    <ul class="modal-highlights">
-      <li>Pré-processamento: normalização, codificação de variáveis categóricas e tratamento de nulos</li>
-      <li>Treinamento com Random Forest, SVM e KNN</li>
-      <li>Avaliação com accuracy, precision, recall e F1-score</li>
-      <li>Visualização da matriz de confusão e curva ROC</li>
-      <li>Comparativo final entre modelos para seleção do melhor</li>
-    </ul>
-    <a href="https://github.com/GiovanaGGP" target="_blank" class="modal-github-btn">Ver no GitHub →</a>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modal-py-auto" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-py-auto')">✕</button>
-    <div class="modal-lang"><span class="project-lang lang-py">Python</span></div>
-    <div class="modal-title">Automação de Processos Jurídicos</div>
-    <div class="modal-full-desc">
-      Solução de automação desenvolvida para o escritório de advocacia onde trabalho. O script processa planilhas com dados de processos, organiza documentos em pastas por cliente/processo, gera relatórios de acompanhamento em PDF e envia notificações automáticas de prazos por e-mail. Reduziu significativamente o tempo gasto em tarefas administrativas repetitivas.
-    </div>
-    <div class="modal-section-label">// tecnologias utilizadas</div>
-    <div class="modal-tags">
-      <span class="modal-tag">Python</span>
-      <span class="modal-tag">openpyxl</span>
-      <span class="modal-tag">smtplib</span>
-      <span class="modal-tag">os / shutil</span>
-      <span class="modal-tag">datetime</span>
-      <span class="modal-tag">schedule</span>
-    </div>
-    <div class="modal-section-label">// funcionalidades</div>
-    <ul class="modal-highlights">
-      <li>Leitura e processamento de planilhas Excel com dados de processos</li>
-      <li>Organização automática de arquivos em estrutura de diretórios por cliente</li>
-      <li>Cálculo e alerta de prazos processuais com dias de antecedência configurável</li>
-      <li>Envio automático de e-mails de notificação com resumo dos prazos</li>
-      <li>Geração de relatório semanal em formato estruturado</li>
-    </ul>
-    <a href="https://github.com/GiovanaGGP" target="_blank" class="modal-github-btn">Ver no GitHub →</a>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modal-iot" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-iot')">✕</button>
-    <div class="modal-lang"><span class="project-lang lang-iot">Arduino / IoT</span></div>
-    <div class="modal-title">Sistema de Monitoramento com Arduino</div>
-    <div class="modal-full-desc">
-      Projeto de integração hardware-software desenvolvido durante minha formação técnica. Combina sensores conectados a um Arduino (temperatura, umidade, luminosidade) com um script Python que lê os dados via comunicação serial e os exibe em uma interface web simples com Flask, gerando gráficos em tempo real e disparando alertas quando os valores saem do intervalo configurado.
-    </div>
-    <div class="modal-section-label">// tecnologias utilizadas</div>
-    <div class="modal-tags">
-      <span class="modal-tag">Arduino (C++)</span>
-      <span class="modal-tag">Python</span>
-      <span class="modal-tag">pyserial</span>
-      <span class="modal-tag">Flask</span>
-      <span class="modal-tag">Chart.js</span>
-      <span class="modal-tag">HTML/CSS</span>
-    </div>
-    <div class="modal-section-label">// funcionalidades</div>
-    <ul class="modal-highlights">
-      <li>Leitura de sensores de temperatura e umidade (DHT11) e luminosidade (LDR)</li>
-      <li>Comunicação serial entre Arduino e Python em tempo real</li>
-      <li>Interface web com gráficos de linha atualizados automaticamente</li>
-      <li>Sistema de alertas configurável por limiar de valor</li>
-      <li>Log de dados com timestamp para análise histórica</li>
-    </ul>
-    <a href="https://github.com/GiovanaGGP" target="_blank" class="modal-github-btn">Ver no GitHub →</a>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modal-java-api" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-java-api')">✕</button>
-    <div class="modal-lang"><span class="project-lang lang-java">Java</span></div>
-    <div class="modal-title">API REST de Gestão de Informações</div>
-    <div class="modal-full-desc">
-      API RESTful desenvolvida em Java puro para gestão de informações digitais. Implementa os principais conceitos de web services: operações CRUD completas, tratamento de requisições HTTP, serialização/deserialização JSON e documentação da API. Desenvolvida com foco em boas práticas de orientação a objetos e organização de código.
-    </div>
-    <div class="modal-section-label">// tecnologias utilizadas</div>
-    <div class="modal-tags">
-      <span class="modal-tag">Java</span>
-      <span class="modal-tag">HTTP Server</span>
-      <span class="modal-tag">JSON (Gson)</span>
-      <span class="modal-tag">Maven</span>
-      <span class="modal-tag">JUnit</span>
-    </div>
-    <div class="modal-section-label">// funcionalidades</div>
-    <ul class="modal-highlights">
-      <li>Endpoints REST para criar, ler, atualizar e deletar registros</li>
-      <li>Serialização e deserialização automática de objetos para JSON</li>
-      <li>Tratamento de erros com códigos HTTP adequados</li>
-      <li>Validação de dados de entrada</li>
-      <li>Testes unitários das camadas de serviço e repositório</li>
-    </ul>
-    <a href="https://github.com/GiovanaGGP" target="_blank" class="modal-github-btn">Ver no GitHub →</a>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modal-data-analysis" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-data-analysis')">✕</button>
-    <div class="modal-lang"><span class="project-lang lang-py">Python</span></div>
-    <div class="modal-title">Análise Exploratória de Dados</div>
-    <div class="modal-full-desc">
-      Pipeline completo de análise exploratória de dados (EDA) aplicado a um dataset público. O projeto cobre todo o processo: carregamento dos dados, inspeção inicial, identificação e tratamento de valores ausentes, análise estatística descritiva, visualização de distribuições e correlações, e extração de insights com documentação dos principais achados.
-    </div>
-    <div class="modal-section-label">// tecnologias utilizadas</div>
-    <div class="modal-tags">
-      <span class="modal-tag">Python</span>
-      <span class="modal-tag">Pandas</span>
-      <span class="modal-tag">Matplotlib</span>
-      <span class="modal-tag">Seaborn</span>
-      <span class="modal-tag">NumPy</span>
-      <span class="modal-tag">Jupyter Notebook</span>
-    </div>
-    <div class="modal-section-label">// etapas realizadas</div>
-    <ul class="modal-highlights">
-      <li>Inspeção inicial: shape, dtypes, valores nulos e duplicados</li>
-      <li>Limpeza: preenchimento ou remoção de valores ausentes, normalização</li>
-      <li>Estatística descritiva: média, mediana, desvio padrão, quartis</li>
-      <li>Visualizações: histogramas, boxplots, heatmap de correlação</li>
-      <li>Relatório com os principais padrões e insights identificados</li>
-    </ul>
-    <a href="https://github.com/GiovanaGGP" target="_blank" class="modal-github-btn">Ver no GitHub →</a>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modal-js-web" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-js-web')">✕</button>
-    <div class="modal-lang"><span class="project-lang lang-js">JavaScript</span></div>
-    <div class="modal-title">Sistema Web para Gestão de Tarefas</div>
-    <div class="modal-full-desc">
-      Aplicação web de gestão de tarefas desenvolvida com JavaScript, HTML e CSS sem frameworks externos. Focada em funcionalidade e usabilidade, com interface limpa e responsiva. Utiliza LocalStorage para persistência de dados no navegador, permitindo uso sem necessidade de servidor ou banco de dados.
-    </div>
-    <div class="modal-section-label">// tecnologias utilizadas</div>
-    <div class="modal-tags">
-      <span class="modal-tag">JavaScript (ES6+)</span>
-      <span class="modal-tag">HTML5</span>
-      <span class="modal-tag">CSS3</span>
-      <span class="modal-tag">LocalStorage</span>
-      <span class="modal-tag">DOM API</span>
-    </div>
-    <div class="modal-section-label">// funcionalidades</div>
-    <ul class="modal-highlights">
-      <li>Criação, edição e exclusão de tarefas com categorias</li>
-      <li>Filtros por status (pendente, em andamento, concluída) e categoria</li>
-      <li>Ordenação por data de criação ou prioridade</li>
-      <li>Persistência automática no LocalStorage do navegador</li>
-      <li>Interface responsiva funcionando em mobile e desktop</li>
-    </ul>
-    <a href="https://github.com/GiovanaGGP" target="_blank" class="modal-github-btn">Ver no GitHub →</a>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modal-chatbot" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-chatbot')">✕</button>
-    <div class="modal-lang"><span class="project-lang lang-ml">IA / NLP</span></div>
-    <div class="modal-title">Chatbot com Processamento de Linguagem</div>
-    <div class="modal-full-desc">
-      Chatbot em Python que aplica técnicas básicas de Processamento de Linguagem Natural (NLP) para identificar intenções em mensagens de texto e retornar respostas adequadas. Desenvolvido como estudo prático de NLP, implementando tokenização, stemming e vetorização TF-IDF para correspondência de intenções.
-    </div>
-    <div class="modal-section-label">// tecnologias utilizadas</div>
-    <div class="modal-tags">
-      <span class="modal-tag">Python</span>
-      <span class="modal-tag">NLTK</span>
-      <span class="modal-tag">TF-IDF</span>
-      <span class="modal-tag">Scikit-learn</span>
-      <span class="modal-tag">Pickle</span>
-    </div>
-    <div class="modal-section-label">// funcionalidades</div>
-    <ul class="modal-highlights">
-      <li>Tokenização e normalização de texto em português</li>
-      <li>Classificação de intenções com vetorização TF-IDF</li>
-      <li>Base de conhecimento configurável em arquivo JSON</li>
-      <li>Respostas variadas para a mesma intenção (evita repetição)</li>
-      <li>Interface de linha de comando para interação em tempo real</li>
-    </ul>
-    <a href="https://github.com/GiovanaGGP" target="_blank" class="modal-github-btn">Ver no GitHub →</a>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modal-java-oop" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-java-oop')">✕</button>
-    <div class="modal-lang"><span class="project-lang lang-java">Java</span></div>
-    <div class="modal-title">Sistema de Biblioteca em Java</div>
-    <div class="modal-full-desc">
-      Sistema de gerenciamento de biblioteca desenvolvido em Java com interface gráfica Swing e arquitetura MVC. Aplica os princípios SOLID e padrões de projeto aprendidos na formação. Permite o controle completo de acervo, usuários, empréstimos e devoluções, com geração de relatórios em console.
-    </div>
-    <div class="modal-section-label">// tecnologias utilizadas</div>
-    <div class="modal-tags">
-      <span class="modal-tag">Java</span>
-      <span class="modal-tag">Swing (GUI)</span>
-      <span class="modal-tag">MVC</span>
-      <span class="modal-tag">SOLID</span>
-      <span class="modal-tag">ArrayList / HashMap</span>
-      <span class="modal-tag">Serialização Java</span>
-    </div>
-    <div class="modal-section-label">// funcionalidades</div>
-    <ul class="modal-highlights">
-      <li>Cadastro de livros com ISBN, título, autor, categoria e quantidade</li>
-      <li>Cadastro de usuários (alunos/funcionários) com histórico de empréstimos</li>
-      <li>Controle de empréstimos com data de devolução e multas por atraso</li>
-      <li>Busca por título, autor ou categoria com filtros combinados</li>
-      <li>Persistência de dados via serialização de objetos Java</li>
-      <li>Relatório de livros mais emprestados e usuários com pendências</li>
-    </ul>
-    <a href="https://github.com/GiovanaGGP" target="_blank" class="modal-github-btn">Ver no GitHub →</a>
-  </div>
-</div>
 
 <script>
   // Cursor glow
-  const glow = document.getElementById('cursor-glow');
+  const cg = document.getElementById('cg');
   document.addEventListener('mousemove', e => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
+    cg.style.left = e.clientX + 'px';
+    cg.style.top  = e.clientY + 'px';
   });
 
   // Scroll reveal
-  const observer = new IntersectionObserver(entries => {
+  const obs = new IntersectionObserver(entries => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('in'), i * 80);
-        observer.unobserve(e.target);
+        setTimeout(() => e.target.classList.add('in'), i * 90);
+        obs.unobserve(e.target);
       }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  // Counter animation for stats
-  function animateCount(el, target, prefix='', suffix='') {
-    let start = 0, duration = 1500;
-    const step = timestamp => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / duration, 1);
-      const val = Math.floor(progress * target);
-      el.textContent = prefix + val + suffix;
-      if (progress < 1) requestAnimationFrame(step);
+  // Counter animation
+  function animCount(el, target, suffix = '') {
+    let start = null;
+    const step = ts => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / 1400, 1);
+      el.textContent = Math.floor(p * target) + suffix;
+      if (p < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
   }
-
   const statsObs = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting) {
       document.querySelectorAll('.stat-num').forEach(el => {
-        const text = el.textContent.trim();
-        if (text === '6+') animateCount(el, 6, '', '+');
-        else if (text === '5') animateCount(el, 5);
-        else if (text === '3') animateCount(el, 3);
-        else if (text === '100%') animateCount(el, 100, '', '%');
+        const t = parseInt(el.dataset.target);
+        const s = el.dataset.suffix || '';
+        animCount(el, t, s);
       });
       statsObs.disconnect();
     }
   }, { threshold: 0.5 });
-  statsObs.observe(document.querySelector('.stats-bar'));
-
-  // Modal functions
-  function openModal(id) {
-    document.getElementById(id).classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal(id) {
-    document.getElementById(id).classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function closeModalOutside(event) {
-    if (event.target.classList.contains('modal-overlay')) {
-      event.target.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  }
-
-  // Close modal on Escape key
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.modal-overlay.open').forEach(m => {
-        m.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    }
-  });
+  const statsEl = document.querySelector('.stats-section');
+  if (statsEl) statsObs.observe(statsEl);
 </script>
 </body>
 </html>
